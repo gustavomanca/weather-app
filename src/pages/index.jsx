@@ -2,7 +2,7 @@ import Head from 'next/head'
 import { useState } from 'react'
 
 import { useMap } from 'hooks'
-import { fetchCities } from 'services'
+import { fetchCitiesByCoords } from 'services'
 
 import Map from 'components/Map'
 
@@ -11,7 +11,7 @@ export default function Home() {
   const [cities, setCities] = useState([])
 
   async function onSearch() {
-    const cities = await fetchCities({ coords })
+    const cities = await fetchCitiesByCoords({ coords })
     setCities(cities)
   }
 
