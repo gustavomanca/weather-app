@@ -8,8 +8,6 @@ export async function fetchCitiesByCoords({ coords }) {
       `find?lat=${lat}&lon=${lng}&cnt=15&units=metric`
     )
 
-    console.log({ data })
-
     const sanitized = data.list.map(({ id, name, main }) => ({
       id,
       name,
