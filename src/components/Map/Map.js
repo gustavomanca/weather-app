@@ -1,37 +1,42 @@
 import { useEffect } from 'react'
+import { MapContainer, TileLayer } from 'react-leaflet'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 
-const DEFAULT_CENTER = [-23.589963056039966, -48.039269778377765]
+import Marker from './Marker'
+import { useMap } from 'hooks'
 
-const Map = ({ children, className, ...rest }) => {
+const layerConfig = {
+  url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+  attribution:
+    '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+}
+
+const handleIcon = () => {
+  delete L.Icon.Default.prototype._getIconUrl
+
+  L.Icon.Default.mergeOptions({
+    iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
+    iconUrl: require('leaflet/dist/images/marker-icon.png'),
+    shadowUrl: require('leaflet/dist/images/marker-shadow.png')
+  })
+}
+
+const Map = () => {
+  const { coords } = useMap()
+
   useEffect(() => {
-    delete L.Icon.Default.prototype._getIconUrl
-
-    L.Icon.Default.mergeOptions({
-      iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
-      iconUrl: require('leaflet/dist/images/marker-icon.png'),
-      shadowUrl: require('leaflet/dist/images/marker-shadow.png')
-    })
+    handleIcon()
   }, [])
 
   return (
     <MapContainer
-      center={DEFAULT_CENTER}
+      center={coords}
       zoom={12}
       style={{ width: '100%', height: '320px' }}
-      {...rest}
     >
-      <TileLayer
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-      />
-      <Marker position={DEFAULT_CENTER}>
-        <Popup>
-          A pretty CSS3 popup. <br /> Easily customizable.
-        </Popup>
-      </Marker>
+      <TileLayer {...layerConfig} />
+      <Marker />
     </MapContainer>
   )
 }
