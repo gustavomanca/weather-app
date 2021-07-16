@@ -1,8 +1,12 @@
 import Head from 'next/head'
 
-import Map from '../components/Map'
+import Map from 'components/Map'
+
+import { useMap } from 'hooks'
 
 export default function Home() {
+  const { coords } = useMap()
+
   return (
     <div>
       <Head>
@@ -11,7 +15,16 @@ export default function Home() {
       </Head>
 
       <main>
-        <Map />
+        <>
+          <button type="button">search</button>
+
+          <div>
+            <p>{coords.lat}</p>
+            <p>{coords.lng}</p>
+          </div>
+
+          <Map />
+        </>
       </main>
     </div>
   )
