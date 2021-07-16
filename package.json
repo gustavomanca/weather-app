@@ -1,9 +1,11 @@
 {
-  "name": "next-leaflet-starter",
-  "homepage": "https://next-leaflet-starter.netlify.app",
+  "name": "weather-app",
   "version": "0.1.0",
   "license": "MIT",
-  "author": "Colby Fayock <hello@colbyfayock.com>",
+  "author": "Gustavo Manca <gustavo.mancaa@gmail.com>",
+  "contributors": [
+    "Colby Fayock <hello@colbyfayock.com>"
+  ],
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -19,12 +21,5 @@
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-leaflet": "^3.0.4"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/colbyfayock/next-leaflet-starter"
-  },
-  "bugs": {
-    "url": "https://github.com/colbyfayock/next-leaflet-starter/issues"
   }
 }
