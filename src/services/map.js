@@ -1,13 +1,14 @@
-const baseUrl = 'http://api.openweathermap.org/data/2.5/find?'
+import { api } from 'services'
 
-export async function fetchCities({ coords }) {
+export async function fetchCitiesByCoords({ coords }) {
   const { lat, lng } = coords
 
   try {
-    const response = await fetch(
-      `${baseUrl}lat=${lat}&lon=${lng}&cnt=15&units=metric&APPID=f63860b69f50e334aedc632d1aa5a98f`
+    const { data } = await api.get(
+      `find?lat=${lat}&lon=${lng}&cnt=15&units=metric`
     )
-    const data = await response.json()
+
+    console.log({ data })
 
     const sanitized = data.list.map(({ id, name, main }) => ({
       id,
